@@ -1,0 +1,30 @@
+<template>
+    <div class="slds-path">
+        <div class="slds-grid slds-path__track">
+            <div class="slds-grid slds-path__scroller-container">
+                <div class="slds-path__scroller" tabindex="-1" role="application">
+                    <div class="slds-path__scroller_inner">
+                        <ul class="slds-path__nav" role="listbox" aria-orientation="horizontal">
+                            <template for:each={path} for:item="p">
+                                <li class={p.className} role="presentation" key={p.stageName}>
+                                    <a aria-selected={p.selected} class="slds-path__link" href="#" role="option" tabindex="-1">
+                                      <span class="slds-path__stage">
+                                        <!-- <span style="color:white;">standard:task2  -->
+                                            <lightning-icon icon-name="utility:check" variant="bare" class="slds-button__icon" size="small" alternative-text={p}></lightning-icon>
+                                        <!-- </span> -->
+                                        <!-- <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                                          <use xlink:href="https://www.lightningdesignsystem.com/assets/icons/utility-sprite/svg/symbols.svg#check"></use>
+                                        </svg>
+                                        <lightning-icon icon-name="utility-sprite"></lightning-icon> -->
+                                      </span>
+                                      <span class="slds-path__title">{p.stageName}</span>
+                                    </a>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
