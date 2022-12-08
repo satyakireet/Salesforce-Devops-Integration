@@ -1,0 +1,47 @@
+<template>
+    <lightning-card title="Jenkins Builds">
+        <template if:true={lastBuildDetails}>
+            <div class="slds-box">
+                <div class="slds-text-heading_medium">Last Build Details </div>
+                <div>
+                    <div>
+                        <template if:true={buildSpinner}>
+                            <div class="exampleHolder">
+                                <lightning-spinner variant="brand" size="small">
+                                </lightning-spinner>
+                            </div>
+                        </template> &nbsp;
+                        Build Number - {lastBuildDetails.number} &nbsp; &nbsp; &nbsp;
+                        Build Result - {lastBuildDetails.result}&nbsp; &nbsp; &nbsp;
+                        Is Building - {lastBuildDetails.building}
+                    </div>
+                    <button class="slds-button slds-button_outline-brand" onclick={refreshBuildStatus}>Refresh</button>
+                </div>
+                <div class={buildFileText}>
+                    <h3 class="slds-section__title">
+                        <button aria-controls="expando-unique-id" aria-expanded="true"
+                            class="slds-button slds-section__title-action" onclick={handleBuildFileText}>
+                            <svg class="slds-section__title-action-icon slds-button__icon slds-button__icon_left"
+                                aria-hidden="true">
+                                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#switch"></use>
+                            </svg>
+                            <span class="slds-truncate" title="Section Title">Console Output for the Latest Build</span>
+                        </button>
+                    </h3>
+                    <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+                        {buildConsoleText}
+                    </div>
+                </div>
+
+            </div>
+        </template>
+        <template if:true={builds}>
+            <lightning-datatable key-field="id" data={builds} columns={columns}>
+            </lightning-datatable>
+        </template>
+        <template if:false={builds}>
+            No Builds Available
+        </template>
+
+    </lightning-card>
+</template>

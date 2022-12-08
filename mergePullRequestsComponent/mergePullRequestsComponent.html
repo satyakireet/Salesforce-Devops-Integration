@@ -1,0 +1,118 @@
+<template>
+    <lightning-card title="Pending Pull Requests" class="slds-p-around_large">
+        <div class="slds-p-horizontal_large">
+            <lightning-combobox label="Projects" value={project} placeholder="Select Project" options={projects} onchange={getProjectRepoRequests}>
+            </lightning-combobox>
+        </div>
+    <template if:true={showRequests}>
+        <div class="slds-p-around_large">
+            <lightning-button variant="Brand" onclick={getPullRequests} label="Refresh">
+            </lightning-button>
+            <template if:true={refreshing}>
+                <div class="slds-spinner_container">
+                    <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                        <span class="slds-assistive-text">Loading</span>
+                        <div class="slds-spinner__dot-a"></div>
+                        <div class="slds-spinner__dot-b"></div>
+                    </div>
+                </div>
+            </template>
+            <br />
+            <template if:false={pullRequests}>
+                No Pull Requests are available.
+            </template>
+            <br />
+            <template if:true={pullRequests}>
+                <table class="slds-table slds-table_bordered slds-border_left slds-border_right">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th></th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Pull Request Number">Pull Request Number</div>
+                            </th>
+
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Title">Title</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Comments">Comments</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Created At">Created At</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Compare">Compare Branch</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Base">Base Branch</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Merge/Close">Merge/Close </div>
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <template for:each={pullRequests} for:item="request" for:index='ind'>
+                            <tr key={request.id}>
+                                <td>{ind}</td>
+                                <td>{request.number}</td>
+                                <td>{request.title}</td>
+                                <td>{request.body}</td>
+                                <td>{request.created_at}</td>
+                                <td>{request.head.ref}</td>
+                                <td>{request.base.ref}</td>
+                                <td>
+                                    <button class="slds-button slds-button_brand" data-pullnumber={request.number} data-source={request.head.ref} data-target={request.base.ref}
+                                        onclick={mergePullRequestModal}>Merge/Close</button>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </template>
+            <br />
+        </div>
+    </template>
+    </lightning-card>
+
+    <!-- Merge Pull Request Modal -->
+    <template if:true={mergeOrClosePullModalButton}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading" aria-modal="true"
+            aria-describedby="modal-content-id" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={closeMergeRequestModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                            size="small" onclick={closeMergeRequestModal}>
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading" class="slds-modal__title slds-hyphenate">Merge/Close Pull Request </h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id">
+                    <lightning-input label="Add Comments" onchange={handlepullrequestMessageInput}></lightning-input>
+                    <template if:true={mergeProcessing}>
+                        <div class="slds-spinner_container">
+                            <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                                <span class="slds-assistive-text">Loading</span>
+                                <div class="slds-spinner__dot-a"></div>
+                                <div class="slds-spinner__dot-b"></div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+                <footer class="slds-modal__footer slds-modal__footer_directional">
+
+                    <button class="slds-button slds-button_neutral" onclick={closeAPullRequest}>Close Pull Request
+                    </button>
+                    <button class="slds-button slds-button_brand" onclick={mergePullRequest}>Merge Pull
+                        Request</button>
+                </footer>
+
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

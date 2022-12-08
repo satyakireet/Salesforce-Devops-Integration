@@ -1,0 +1,48 @@
+<template>
+    <lightning-card>
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_4-of-12 slds-p-right_medium">
+                <lightning-combobox name="Year Filter" class="yeaarFilter yearMonthFilterSELECT slds-p-left_medium"
+                    label="Year" value={selectedYearValue} placeholder="Select Year" options={yearOptions}
+                    onchange={handleFilterChange}>
+                </lightning-combobox>
+            </div>
+            <div class="slds-col slds-size_4-of-12 slds-p-right_medium">
+                <lightning-combobox class="monthFilter" name="Month Filter" label="Month" value={selectedMonthValue}
+                    placeholder="Select Month" options={monthOptions} onchange={handleFilterChange}>
+                </lightning-combobox>
+            </div>
+        </div>
+        <br>
+        <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_5-of-12">
+            <lightning-input type="checkbox" label="User Story Without any Relation with Sprints" onchange={handleChange} name="input1"></lightning-input>
+          </div>
+        </div>
+        <br>
+        <lightning-tabset variant="scoped">
+            <lightning-tab label="Sprint List" icon-name="utility:filterList">
+                <div class="slds-p-around_medium">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-size_1-of-1" style="height:200px;">
+                            <template if:true={isDataAvailable}>
+                                <lightning-datatable class="ytest" data={lst} onrowselection={handleSelect} columns={column} key-field="Id"></lightning-datatable>
+                                <c-pagination records={sprintWireData} onupdate={handleListPagination}></c-pagination>
+                            </template>
+<template if:false={isDataAvailable}>
+                                <div class="slds-text-align_center" style="padding: 2rem;">
+                                    <p>No items to display.</p>
+                                </div>
+                            </template>
+</div>
+</div>
+</div>
+</lightning-tab>
+</lightning-tabset>
+<div class="slds-grid slds-wrap">
+    <div class="slds-col" style="padding-left: 714px;">
+        <c-export-c-s-v selected-year-value={selectedYearValue} is-checked={isChecked} sprint-wire-data={sprintWireData} sprintlst={sprintlst} record-id={recordId} selected-month-value={selectedMonthValue}></c-export-c-s-v>
+    </div>
+</div>
+</lightning-card>
+</template>

@@ -1,0 +1,12 @@
+<template>
+  <lightning-card>
+    <div class="slds-grid">
+      <div class="slds-col">
+        <lightning-button class="slds-m-left_small btn success" label="Export CSV" title="Export CSV"
+          icon-name="utility:download" onclick={download}></lightning-button>
+      </div>
+    </div>
+  </lightning-card>
+  <c-xlsx-main header-list={xlsHeader} filename={filename} worksheet-name-list={workSheetNameList} sheet-data={xlsData}>
+  </c-xlsx-main>
+</template>

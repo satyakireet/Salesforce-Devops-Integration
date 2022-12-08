@@ -1,0 +1,54 @@
+<template>
+    <lightning-card icon-name="standard:picklist_type" title="Metadata List">
+        <div class="slds-grid">
+            <lightning-combobox style="width: 100%;float: left;" placeholder="Select Dependencies" options={options}
+                onchange={handleChange}>
+            </lightning-combobox>
+        </div>
+        <template if:true={isLWC}>
+            <c-lwc-dependencies></c-lwc-dependencies>
+        </template>
+<template if:true={isApexClass}>
+            <c-apex-classes-dependencies></c-apex-classes-dependencies>
+        </template>
+<template if:true={isApexTrigger}>
+            <c-apex-triggers-dependencies></c-apex-triggers-dependencies>
+        </template>
+<template if:true={isCustomApplication}>
+            <c-custom-application-dependencies></c-custom-application-dependencies>
+        </template>
+<template if:true={isCustomField}>
+            <c-custom-field-dependencies></c-custom-field-dependencies>
+        </template>
+<template if:true={isFieldMapping}>
+            <c-field-mapping-dependencies></c-field-mapping-dependencies>
+        </template>
+<template if:true={isGlobalValueSet}>
+            <c-global-value-set-dependencies></c-global-value-set-dependencies>
+        </template>
+<template if:true={isMetadataPackage}>
+            <c-metadata-package-dependencies></c-metadata-package-dependencies>
+        </template>
+<template if:true={isProfile}>
+            <c-profile-dependencies></c-profile-dependencies>
+        </template>
+<template if:true={isStaticResource}>
+            <c-static-resource-dependencies></c-static-resource-dependencies>
+        </template>
+<template if:true={isUser}>
+            <c-user-dependencies></c-user-dependencies>
+        </template>
+<template if:true={isValidationRule}>
+            <c-validation-rule-dependencies></c-validation-rule-dependencies>
+        </template>
+<template if:true={isFlow}>
+            <c-flow-dependencies></c-flow-dependencies>
+        </template>
+<template if:true={isNamedCredential}>
+            <c-named-credentials-dependencies></c-named-credentials-dependencies>
+        </template>
+<template if:true={isCustomObject}>
+            <c-custom-object-dependencies></c-custom-object-dependencies>
+        </template>
+</lightning-card>
+</template>

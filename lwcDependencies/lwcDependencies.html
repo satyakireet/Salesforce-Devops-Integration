@@ -1,0 +1,50 @@
+<template>
+    <lightning-card>
+        <lightning-tabset>
+            <lightning-tab label="LWC" icon-name="standard:connected_apps">
+                <div class="slds-p-around_medium">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-size_1-of-1 slds-text-align--left ">
+                            <lightning-button label="Check Dependencies" variant="brand" icon-name="custom:custom96"
+                                onclick={testmetadata}></lightning-button>
+                        </div>
+                        <div class="slds-size_1-of-1" style="height:200px;">
+                            <lightning-datatable class="ytest" data={lst} columns={lcolumn} key-field="Id">
+                            </lightning-datatable>
+                            <template if:true={isDataAvailable}>
+                                <c-pagination records={lightningComponents} onupdate={handleListPagination}>
+                                </c-pagination>
+                            </template>
+<template if:false={isDataAvailable}>
+                                <div class="slds-text-align_center" style="padding: 2rem;">
+                                    <p>No items to display.</p>
+                                </div>
+                            </template>
+</div>
+</div>
+</div>
+
+<div if:true={test} class="slds-p-around_medium">
+    <div class="slds-grid slds-wrap">
+        <lightning-card style="padding-top: 1cm;" icon-name="standard:filter" title="Dependency List">
+            <template if:true={showDependencies}>
+                        <div class="slds-size_1-of-1" style="height:200px;">
+                            <lightning-datatable data={selectedDependencies} columns={scolumn} key-field="Id">
+                            </lightning-datatable>
+                        </div>
+                    </template>
+            <template if:false={showDependencies}>
+                        <div class="slds-illustration slds-illustration_small" aria-hidden="true">
+                            <img src="/img/chatter/Desert.svg" class="slds-illustration__svg" alt="No Dependencies Found" />
+                            <div class="slds-text-color_weak">
+                                <h3 class="slds-text-heading_medium">No Dependencies Found</h3>
+                            </div>
+                        </div>
+                    </template>
+        </lightning-card>
+    </div>
+</div>
+</lightning-tab>
+</lightning-tabset>
+</lightning-card>
+</template>

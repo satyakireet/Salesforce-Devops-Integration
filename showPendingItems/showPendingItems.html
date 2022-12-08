@@ -1,0 +1,34 @@
+<template>
+    <lightning-card title="Pending Items">
+        <!-- <template for:each={pendingProjects} for:item="project">
+            {project.Name}
+        </template> -->
+        <lightning-accordion allow-multiple-sections-open active-section-name={activeSections}>
+        <lightning-accordion-section name="Projects" label="Projects" style="background:lightgray">
+                <lightning-datatable data={allProjectArray} columns={columns} hide-checkbox-column key-field="Id">
+                </lightning-datatable>
+            </lightning-accordion-section>
+            <lightning-accordion-section name="Sprints" label="Sprints">
+                <lightning-datatable data={allSprintArray} columns={cols} hide-checkbox-column key-field="Id">
+                </lightning-datatable>
+            </lightning-accordion-section>
+        </lightning-accordion>
+        <!-- <ul class="slds-accordion">
+            <li class="slds-accordion__list-item">
+              <section class="slds-accordion__section slds-is-open">
+                <div class="slds-accordion__summary">
+                  <h2 class="slds-accordion__summary-heading" style="background: red;">
+                    <button class="slds-button slds-button_reset slds-accordion__summary-action" aria-controls="referenceId-45" aria-expanded="true" title="Accordion summary">
+                      <svg class="slds-accordion__summary-action-icon slds-button__icon slds-button__icon_left" aria-hidden="true">
+                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#switch"></use>
+                      </svg>
+                      <span class="slds-accordion__summary-content" >Accordion summary</span>
+                    </button>
+                  </h2>
+                </div>
+                <div class="slds-accordion__content" id="referenceId-45">Accordion details - A</div>
+              </section>
+            </li>
+        </ul> -->
+    </lightning-card>
+</template>

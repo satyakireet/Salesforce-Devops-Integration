@@ -1,0 +1,46 @@
+<template>
+    <lightning-card title="All Apex Tests">
+        <lightning-tabset variant="vertical">
+            <lightning-tab label="Run Tests" icon-name="custom:custom3">
+                <div class="slds-p-around_medium">
+                    <div class="slds-grid slds-wrap">
+
+                        <div class="slds-size_1-of-1 slds-text-align--left ">
+                            <lightning-button label="Run Test" variant="brand" icon-name="custom:custom3" onclick={runSelectedTests}></lightning-button>
+                            <!-- <lightning-button label="Refresh" onclick={getRecords}></lightning-button> -->
+                        </div>
+                        
+                        <div class="slds-size_1-of-1" style="height:200px;">
+                            <lightning-datatable class="table-test" data={testRows} columns={column} key-field="Id"></lightning-datatable>
+                        </div>
+                    </div>
+                </div>
+            </lightning-tab>
+            
+            
+            <lightning-tab label="Code Coverage" icon-name="custom:custom20">
+                <div class="slds-p-around_medium">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-size_1-of-1 slds-text-align--left ">
+                            <lightning-button label="Check Code Coverage" variant="brand" icon-name="custom:custom20" onclick={checkCodeCoverage}></lightning-button>
+                            <!-- <lightning-button label="Refresh" onclick={getRecords}></lightning-button> -->
+                        </div>
+                        
+                        <div class="slds-size_1-of-1" style="height:200px;">
+                            <lightning-datatable data={apexRows} columns={column} key-field="Id"></lightning-datatable>
+                        </div>
+                        <template if:true={showCoverage}>
+                            <lightning-card title="Apex Test Code Coverage">
+                                <div class="slds-size_1-of-1" style="height:200px;">
+                                    <lightning-datatable data={resultRows} columns={rcolumn} key-field="Id"></lightning-datatable>
+                                </div>
+                            </lightning-card>
+                        </template>
+                    </div>
+                </div>
+            </lightning-tab>
+        </lightning-tabset>
+        
+        
+    </lightning-card>
+</template>
